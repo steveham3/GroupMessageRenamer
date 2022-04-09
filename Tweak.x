@@ -23,9 +23,9 @@
         UIMenu* actionMenu = originalBlock(actions);
         NSMutableArray* children = [NSMutableArray arrayWithArray:actionMenu.children];
 
-        UIAction* renameAction = [UIAction actionWithTitle:@"Change Display Name" image:nil identifier:nil handler:^(UIAction* action) {
+        UIAction* renameAction = [UIAction actionWithTitle:@"Change Group Name" image:nil identifier:nil handler:^(UIAction* action) {
             CKConversation* conversation = [self conversationAtIndexPath:indexPath];
-            UIAlertController* alertController = [UIAlertController alertControllerWithTitle:@"New Display Name" message:nil preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertController* alertController = [UIAlertController alertControllerWithTitle:@"New Group Name" message:@"Leave blank to remove the name" preferredStyle:UIAlertControllerStyleAlert];
             [alertController addTextFieldWithConfigurationHandler:nil];
             alertController.textFields[0].text = [conversation displayName];
 
