@@ -1,13 +1,12 @@
-TARGET := iphone:clang:latest:13.0
-INSTALL_TARGET_PROCESSES = MobileSMS
-
 FINALPACKAGE = 1
+TARGET := iphone:clang:latest:14.0
+INSTALL_TARGET_PROCESSES = MobileSMS
 
 include $(THEOS)/makefiles/common.mk
 
-TWEAK_NAME = MessageRename
+TWEAK_NAME = GroupMessageRenamer
 
-MessageRename_FILES = Tweak.x
-MessageRenaem_CFLAGS = -fobjc-arc
+GroupMessageRenamer_FILES = Tweak.x
+GroupMessageRenamer_CFLAGS = -fobjc-arc
 
 include $(THEOS_MAKE_PATH)/tweak.mk

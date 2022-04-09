@@ -1,9 +1,9 @@
-Package: us.sunflsks.messagerename
-Name: MessageRename
-Version: 1.0.0
+Package: com.steveham3.groupmessagerenamer
+Name: GroupMessageRenamer
+Version: 1.0
 Architecture: iphoneos-arm
-Description: Rename any SMS/MMS message thread by long pressing on the thread and selecting Change Display Name. You can remove the display name by selecting Reset Display Name.
-Maintainer: sunchipnacho
-Author: sunchipnacho
+Description: Rename any group message thread in iOS 14 by long pressing on the thread and selecting Change Display Name
+Maintainer: Steven Hammon
+Author: Steven Hammon
 Section: Tweaks
 Depends: mobilesubstrate (>= 0.9.5000)
