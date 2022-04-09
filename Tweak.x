@@ -26,6 +26,8 @@
             UIAlertController* alertController = [UIAlertController alertControllerWithTitle:@"New Display Name" message:nil preferredStyle:UIAlertControllerStyleAlert];
             [alertController addTextFieldWithConfigurationHandler:nil];
 
+            [alertController addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil]];
+			
             [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction* alertAction){
                 CKConversation* conversation = [self conversationAtIndexPath:indexPath];
                 UITextField* textField = alertController.textFields[0];
