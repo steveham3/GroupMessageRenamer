@@ -2,7 +2,7 @@ Package: com.steveham3.groupmessagerenamer
 Name: GroupMessageRenamer
 Version: 1.0
 Architecture: iphoneos-arm
-Description: Rename any group message thread in iOS 14 by long pressing on the thread and selecting Change Display Name
+Description: Rename any group message thread in iOS 14 by long pressing on the thread and selecting Change Group Name
 Maintainer: Steven Hammon
 Author: Steven Hammon
 Section: Tweaks
