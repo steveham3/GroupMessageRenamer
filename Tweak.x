@@ -4,51 +4,13 @@
 @property (nonatomic, copy) UIContextMenuActionProvider actionProvider;
 @end
 
-@interface CKNavbarCanvasViewController : UIViewController
--(UILabel*)defaultLabel;
-@end
-
 @interface CKConversation : NSObject
--(NSString*)displayName;
--(NSString*)name;
--(NSString*)uniqueIdentifier;
--(NSString*)msgrenameNewDisplayName;
+-(void)setDisplayName:(NSString *)arg1;
 @end
 
 @interface CKConversationListCollectionViewController : UICollectionViewController
 -(CKConversation*)conversationAtIndexPath:(NSIndexPath*)path;
 @end
-
-%hook CKConversation
-
-%new
--(NSString*)msgrenameNewDisplayName {
-    NSDictionary* mapping = [[NSUserDefaults standardUserDefaults] dictionaryForKey:@"us.sunflsks.msgrename/Mapping"];
-    NSString* uniqueID = [self uniqueIdentifier];
-    if (mapping[uniqueID]) {
-        return mapping[uniqueID];
-    }
-
-    return nil;
-}
-
--(BOOL)hasDisplayName {
-    if ([self msgrenameNewDisplayName]) {
-        return YES;
-    }
-
-    return %orig();
-}
-
--(NSString*)displayName {
-    if ([self msgrenameNewDisplayName]) {
-        return [self msgrenameNewDisplayName];
-    }
-
-    return %orig();
-}
-
-%end
 
 %hook CKConversationListCollectionViewController
 
@@ -66,25 +28,15 @@
 
             [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction* alertAction){
                 CKConversation* conversation = [self conversationAtIndexPath:indexPath];
-                NSMutableDictionary* renameDict = [NSMutableDictionary dictionaryWithDictionary:[[NSUserDefaults standardUserDefaults] dictionaryForKey:@"us.sunflsks.msgrename/Mapping"]];
                 UITextField* textField = alertController.textFields[0];
-                renameDict[[conversation uniqueIdentifier]] = textField.text;
-                [[NSUserDefaults standardUserDefaults] setObject:renameDict forKey:@"us.sunflsks.msgrename/Mapping"];
+                [conversation setDisplayName:textField.text];
                 [self.collectionView reloadData];
             }]];
 
             [self presentViewController:alertController animated:YES completion:nil];
         }];
 
-        UIAction* clearAction = [UIAction actionWithTitle:@"Reset Display Name" image:nil identifier:nil handler:^(UIAction* action) {
-            CKConversation* conversation = [self conversationAtIndexPath:indexPath];
-            NSMutableDictionary* renameDict = [NSMutableDictionary dictionaryWithDictionary:[[NSUserDefaults standardUserDefaults] dictionaryForKey:@"us.sunflsks.msgrename/Mapping"]];
-            [renameDict removeObjectForKey:[conversation uniqueIdentifier]];
-            [[NSUserDefaults standardUserDefaults] setObject:renameDict forKey:@"us.sunflsks.msgrename/Mapping"];
-            [self.collectionView reloadData];
-        }];
-
-        [children addObjectsFromArray:@[renameAction, clearAction]];
+        [children addObjectsFromArray:@[renameAction]];
         return [actionMenu menuByReplacingChildren:children];
     };
 
