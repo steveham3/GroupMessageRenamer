@@ -2,7 +2,7 @@ Package: us.sunflsks.messagerename
 Name: MessageRename
 Version: 1.0.0
 Architecture: iphoneos-arm
-Description: An awesome MobileSubstrate tweak!
+Description: Rename any SMS/MMS message thread by long pressing on the thread and selecting Change Display Name. You can remove the display name by selecting Reset Display Name.
 Maintainer: sunchipnacho
 Author: sunchipnacho
 Section: Tweaks
