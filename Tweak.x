@@ -5,6 +5,7 @@
 @end
 
 @interface CKConversation : NSObject
+-(NSString *)displayName;
 -(void)setDisplayName:(NSString *)arg1;
 @end
 
@@ -23,13 +24,14 @@
         NSMutableArray* children = [NSMutableArray arrayWithArray:actionMenu.children];
 
         UIAction* renameAction = [UIAction actionWithTitle:@"Change Display Name" image:nil identifier:nil handler:^(UIAction* action) {
+            CKConversation* conversation = [self conversationAtIndexPath:indexPath];
             UIAlertController* alertController = [UIAlertController alertControllerWithTitle:@"New Display Name" message:nil preferredStyle:UIAlertControllerStyleAlert];
             [alertController addTextFieldWithConfigurationHandler:nil];
+            alertController.textFields[0].text = [conversation displayName];
 
             [alertController addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil]];
 			
             [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction* alertAction){
-                CKConversation* conversation = [self conversationAtIndexPath:indexPath];
                 UITextField* textField = alertController.textFields[0];
                 [conversation setDisplayName:textField.text];
                 [self.collectionView reloadData];
